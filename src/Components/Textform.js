@@ -9,6 +9,12 @@ export default function Textform(props) {
         let newtext=text.toUpperCase();
         setText(newtext);
     }
+
+    const speak = () => {
+      let msg = new SpeechSynthesisUtterance();
+      msg.text = text;
+      window.speechSynthesis.speak(msg);
+    }
     
     //handleChange function-
     const handleChange=(event)=>{
@@ -32,6 +38,9 @@ export default function Textform(props) {
 </div>
 
 <button className="btn btn-primary" onClick={Upclick}>Covert to UpperCase</button>
+<button type="submit" onClick={speak} className="btn btn-primary mx-2 my-2">Speak</button>
+
+
     </div>
 
     <div className="container my-3">
