@@ -13,6 +13,10 @@ export default function Textform(props) {
     const speak = () => {
       let msg = new SpeechSynthesisUtterance();
       msg.text = text;
+      msg.voice = speechSynthesis.getVoices().filter(function(voice) {
+        return voice.name == "Google UK English Female"
+    
+      })[0];
       window.speechSynthesis.speak(msg);
     }
     
