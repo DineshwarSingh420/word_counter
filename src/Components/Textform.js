@@ -8,6 +8,7 @@ export default function Textform(props) {
         console.log("upper case clicked");
         let newtext=text.toUpperCase();
         setText(newtext);
+        props.showAlert("Converted to Uppercase!","success");
     }
 
     const speak = () => {
@@ -18,6 +19,8 @@ export default function Textform(props) {
     
       })[0];
       window.speechSynthesis.speak(msg);
+      props.showAlert("Listen to Angela!","success");
+
     }
     
     //handleChange function-
