@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import About from './Components/About';
 import Textform from './Components/Textform';
 import Navbar from './Components/navbar.js';
 import Alert from './Components/Alert';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
+  
   const[Mode, setMode]=useState('light'); // whether dark mode is enable or not
   const[alert, setAlert]=useState(null); // whether dark mode is enable or not
 
@@ -25,6 +28,7 @@ if(Mode==='light'){
   setMode('dark')
   document.body.style.backgroundColor='black'
   showAlert("Dark mode has been enabled","success ")
+  // document.title='Dark Mode Enable'
 }
 else{
   setMode('light')
@@ -36,15 +40,27 @@ else{
 
   return (
     <>
-<Navbar title="Home_page" about="about_us" mode={Mode} toggleMode={toggleMode}/>
+       <BrowserRouter>
+<Navbar title="Home_page" about="about_us" mode={Mode} toggleMode={toggleMode}  />
 <Alert alert={alert}/>
 
 <div className="container">
-<Textform showAlert={showAlert} heading="Enter the Text Here"/>
+
+          <Routes>
+            <Route exact path="/about" element={<About />} />
+          </Routes>
+
+          <Routes>
+          <Route exact path="/"
+         element={ <Textform showAlert={showAlert} heading="Enter the Text Here"/>}
+          />
+          </Routes>
+        
+        
 
 </div>
-{/* <About/> */}
-    </>
+</BrowserRouter>  
+</>
   );
 }
 
