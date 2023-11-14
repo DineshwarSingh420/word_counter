@@ -22,6 +22,18 @@ export default function Textform(props) {
       props.showAlert("Listen to Angela!","success");
 
     }
+
+    //copy text
+    const handlecopy=()=>{
+      console.log('text', text)
+      var textField = document.createElement('textarea')
+      textField.innerText = text
+      document.body.appendChild(textField)
+      textField.select()
+      document.execCommand('copy')
+      textField.remove()
+     
+    }
     
     //handleChange function-
     const handleChange=(event)=>{
@@ -29,7 +41,7 @@ export default function Textform(props) {
         setText(event.target.value);
     }
     
-    const [text, setText] = useState("enter text here2");  // hooks in react that cause updation in value;
+    const [text, setText] = useState("Enter text Here");  // hooks in react that cause updation in value;
 
   return (
     <>
@@ -44,16 +56,17 @@ export default function Textform(props) {
   <textarea className="form-control" value= {text} onChange={handleChange}id="mybox" rows="8"></textarea>
 </div>
 
-<button className="btn btn-primary" onClick={Upclick}>Covert to UpperCase</button>
-<button type="submit" onClick={speak} className="btn btn-primary mx-2 my-2">Speak</button>
+<button disabled={text.length===0} className="btn btn-primary" onClick={Upclick}>Covert to UpperCase</button>
+<button disabled={text.length===0} type="submit" onClick={speak} className="btn btn-primary mx-2 my-2">Speak</button>
+<button disabled={text.length===0}  className="btn btn-primary mx-2 my-2" onClick={handlecopy} >Copy Text</button>
 
 
     </div>
 
     <div className="container my-3">
       <h2>Your text Summary</h2>
-      <p>{text.split(" ").length} words and {text.length} characters</p>
-      <p>{0.08*text.split(" ").length }minutes to read</p>
+      <p>{text.split(" ").filter((element)=>{return element.length!=0}).length} words and {text.length} characters</p>
+      <p>{0.08*text.split(" ").filter((element)=>{return element.length!=0}).length } minutes to read</p>
       <h2>Preview</h2>
       <p>{text}</p>
       

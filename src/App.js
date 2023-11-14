@@ -47,7 +47,7 @@ else{
 <div className="container">
 
           <Routes>
-            <Route exact path="/about" element={<About />} />
+            <Route exact path="/about" element={<About mode={Mode} />} />
           </Routes>
 
           <Routes>
